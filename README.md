@@ -79,7 +79,13 @@ Container internally uses the following configuration templates:
 * SOGo: `/templates/sogo/plist_ldap`
 * dovecot: `/templates/dovecot/ldap/passdb.conf`
 
-These files have been tested against Active Directory running on Windows Server 2019 domain controller. If necessary, you can edit and remount them through docker volumes. Some documentation on these files can be found here: [dovecot](https://doc.dovecot.org/configuration_manual/authentication/ldap/), [SOGo](https://sogo.nu/files/docs/SOGoInstallationGuide.html#_authentication_using_ldap)
+These files have been tested against a docker-compose stack comprising of 
+1. [Bitnami's OpenLDAP Docker image](https://hub.docker.com/r/bitnami/openldap/) & 
+2. [LDAP Account Manager (LAM)](https://hub.docker.com/r/ldapaccountmanager/lam) 
+
+running on Debian 11.
+
+If necessary, you can edit and remount them through docker volumes. Some documentation on these files can be found here: [dovecot](https://doc.dovecot.org/configuration_manual/authentication/ldap/), [SOGo](https://sogo.nu/files/docs/SOGoInstallationGuide.html#_authentication_using_ldap)
 
 ## Limitations
 
