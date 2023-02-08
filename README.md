@@ -16,17 +16,18 @@ This is a fork of the [openldap-mailcow project](https://github.com/Programmieru
 
 A python script periodically checks and creates new LDAP accounts and deactivates deleted and disabled ones with mailcow API. It also enables LDAP authentication in SOGo and dovecot.
 
-## Prerequisites
-Make sure that RDN identifier for user accounts in OpenLDAP is set to `uid`.
-
 ## Usage
 
+### Prerequisites
+Make sure that RDN identifier for user accounts in OpenLDAP is set to `uid`.
+
+### Setup
 1. Create a `data/ldap` directory. SQLite database for synchronization will be stored there.
 2. Extend your `docker-compose.override.yml` with an additional container:
 
     ```yaml
      ldap-mailcow:
-        build: ./ldap-mailcow
+        image: nextboss/openldap
         network_mode: host
         container_name: mailcowcustomized_ldap-mailcow
         depends_on:
