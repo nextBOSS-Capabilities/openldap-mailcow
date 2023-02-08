@@ -1,3 +1,4 @@
+# Docker image
 FROM python:3-alpine
 
 RUN apk --no-cache add build-base openldap-dev python3-dev
