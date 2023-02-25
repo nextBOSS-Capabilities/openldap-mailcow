@@ -28,7 +28,7 @@ Make sure that RDN identifier for user accounts in OpenLDAP is set to `uid`.
 
     ```yaml
      ldap-mailcow:
-        image: nextboss/openldap
+        image: nextboss/openldap-mailcow
         network_mode: host
         container_name: mailcowcustomized_ldap-mailcow
         depends_on:
