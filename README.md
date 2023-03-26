@@ -114,5 +114,11 @@ I’ve created this tool because I needed it for my regular work. You are free t
 
 **You can always [contact me](mailto:lhc@next-boss.eu) to help you with the integration or for custom modifications on a paid basis. My current hourly rate (ActivityWatch tracked) is 120,-€ with 3h minimum commitment.**
 
+## Buy Me a ☕
+
+If you enjoy using this project and would like to show your support, please consider buying me a coffee ☕. As an open source developer, I rely on the support of the community to keep this project going.
+
+[:heart: Sponsor](https://github.com/sponsors/l4b4r4b4b4)
+
 ## Credits
 This is a fork of the [openldap-mailcow project](https://github.com/Programmierus/ldap-mailcow) with slight modifications to work with OpenLDAP out of the box.
