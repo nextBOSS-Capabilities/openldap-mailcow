@@ -51,26 +51,14 @@ Make sure that RDN identifier for user accounts in OpenLDAP is set to `uid`.
             - LDAP-MAILCOW_SOGO_LDAP_FILTER=objectClass='inetOrgPerson'
             
     ```
+3. LDAP template fine-tuning
 
-3. Configure environmental variables:
-
-    * `LDAP-MAILCOW_LDAP_URI` - LDAP (e.g., Active Directory) URI (must be reachable from within the container). The URIs are in syntax `protocol://host:port`. For example `ldap://localhost` or `ldaps://secure.domain.org`
-    * `LDAP-MAILCOW_LDAP_BASE_DN` - base DN where user accounts can be found
-    * `LDAP-MAILCOW_LDAP_BIND_DN` - bind DN of a special LDAP account that will be used to browse for users
-    * `LDAP-MAILCOW_LDAP_BIND_DN_PASSWORD` - password for bind DN account
-    * `LDAP-MAILCOW_API_HOST` - mailcow API url. Make sure it's enabled and accessible from within the container for both reads and writes
-    * `LDAP-MAILCOW_API_KEY` - mailcow API key (read/write)
-    * `LDAP-MAILCOW_SYNC_INTERVAL` - interval in seconds between LDAP synchronizations
-    * **Optional** LDAP filters (see example above). SOGo uses special syntax, so you either have to **specify both or none**:
-        * `LDAP-MAILCOW_LDAP_FILTER` - LDAP filter to apply, defaults to `(&(objectClass=user)(objectCategory=person))`
-        * `LDAP-MAILCOW_SOGO_LDAP_FILTER` - LDAP filter to apply for SOGo ([special syntax](https://sogo.nu/files/docs/SOGoInstallationGuide.html#_authentication_using_ldap)), defaults to `objectClass='user' AND objectCategory='person'`
-
-4. Start additional container: `docker-compose up -d ldap-mailcow`
-5. Check logs `docker-compose logs ldap-mailcow`
-6. Restart dovecot and SOGo if necessary `docker-compose restart sogo-mailcow dovecot-mailcow`
-
-### LDAP Fine-tuning
-
+Change the following line in `./templates/dovecot/ldap/passdb.conf` to fit your LDAP setup:
+```
+...
+auth_bind_userdn = uid=%n,ou=People,dc=next-boss,dc=eu
+...
+```
 Container internally uses the following configuration templates:
 
 * SOGo: `/templates/sogo/plist_ldap`
@@ -83,6 +71,23 @@ These files have been tested against a docker-compose stack comprising of
 running on Debian 11.
 
 If necessary, you can edit and remount them through docker volumes. Some documentation on these files can be found here: [dovecot](https://doc.dovecot.org/configuration_manual/authentication/ldap/), [SOGo](https://sogo.nu/files/docs/SOGoInstallationGuide.html#_authentication_using_ldap)
+
+4. Configure environmental variables:
+
+    * `LDAP-MAILCOW_LDAP_URI` - LDAP (e.g., Active Directory) URI (must be reachable from within the container). The URIs are in syntax `protocol://host:port`. For example `ldap://localhost` or `ldaps://secure.domain.org`
+    * `LDAP-MAILCOW_LDAP_BASE_DN` - base DN where user accounts can be found
+    * `LDAP-MAILCOW_LDAP_BIND_DN` - bind DN of a special LDAP account that will be used to browse for users
+    * `LDAP-MAILCOW_LDAP_BIND_DN_PASSWORD` - password for bind DN account
+    * `LDAP-MAILCOW_API_HOST` - mailcow API url. Make sure it's enabled and accessible from within the container for both reads and writes
+    * `LDAP-MAILCOW_API_KEY` - mailcow API key (read/write)
+    * `LDAP-MAILCOW_SYNC_INTERVAL` - interval in seconds between LDAP synchronizations
+    * **Optional** LDAP filters (see example above). SOGo uses special syntax, so you either have to **specify both or none**:
+        * `LDAP-MAILCOW_LDAP_FILTER` - LDAP filter to apply, defaults to `(&(objectClass=user)(objectCategory=person))`
+        * `LDAP-MAILCOW_SOGO_LDAP_FILTER` - LDAP filter to apply for SOGo ([special syntax](https://sogo.nu/files/docs/SOGoInstallationGuide.html#_authentication_using_ldap)), defaults to `objectClass='user' AND objectCategory='person'`
+
+5. Start additional container: `docker-compose up -d ldap-mailcow`
+6. Check logs `docker-compose logs ldap-mailcow`
+7. Restart dovecot and SOGo if necessary `docker-compose restart sogo-mailcow dovecot-mailcow`
 
 ## Limitations
 
