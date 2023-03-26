@@ -120,5 +120,26 @@ If you enjoy using this project and would like to show your support, please cons
 
 [:heart: Sponsor](https://github.com/sponsors/l4b4r4b4b4)
 
+<a href="https://www.example.com" class="my-button">Click me!</a>
+
+<style>
+.my-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.my-button:hover {
+  background-color: #3e8e41;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+</style>
+
+
 ## Credits
 This is a fork of the [openldap-mailcow project](https://github.com/Programmierus/ldap-mailcow) with slight modifications to work with OpenLDAP out of the box.
